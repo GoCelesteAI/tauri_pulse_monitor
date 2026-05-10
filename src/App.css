@@ -1,0 +1,182 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0a0e14;
+  --bg-2: #14181f;
+  --panel: #1a1f2c;
+  --border: rgba(255, 193, 49, 0.25);
+  --text: #ffffff;
+  --muted: #94a3b8;
+  --slate: #cbd5e1;
+  --amber: #FFC131;
+  --amber-light: #FFD971;
+  --amber-deep: #E0A82E;
+  --green: #10b981;
+  --red: #ef4444;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, "SF Pro Display", system-ui, sans-serif;
+  background: linear-gradient(135deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg) 100%);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 36px;
+  height: 100vh;
+}
+
+header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  width: 100%;
+}
+.brand {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+.brand-accent {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--amber);
+  letter-spacing: -0.5px;
+}
+.subtitle {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.dial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.heart {
+  font-size: 96px;
+  color: var(--amber);
+  text-shadow: 0 0 60px rgba(255, 193, 49, 0.55);
+  transition: transform 0.18s ease, opacity 0.2s ease;
+  opacity: 0.55;
+}
+.heart.beating {
+  animation: beat 1s ease-in-out infinite;
+  opacity: 1;
+}
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  20% { transform: scale(1.18); }
+  40% { transform: scale(1.0); }
+  60% { transform: scale(1.08); }
+}
+
+.count {
+  font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  font-size: 96px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -2px;
+  line-height: 1;
+}
+.elapsed {
+  color: var(--amber-light);
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.controls {
+  display: flex;
+  gap: 14px;
+  margin: 18px 0;
+}
+.btn {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.16s;
+}
+.btn:hover:not(:disabled) {
+  border-color: var(--amber);
+  background: rgba(255, 193, 49, 0.08);
+}
+.btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.btn.primary {
+  background: var(--amber);
+  color: var(--bg);
+  border-color: var(--amber);
+}
+.btn.primary:hover:not(:disabled) {
+  background: var(--amber-light);
+  border-color: var(--amber-light);
+}
+.btn.ghost {
+  background: transparent;
+}
+
+footer {
+  font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+}
+
+/* Demo cursor — a stylised mouse pointer that animates between buttons
+   during the recording (since synthetic CGEvents don't register under
+   ffmpeg avfoundation capture). Removed when shipping the real app. */
+.demo-cursor {
+  position: fixed;
+  width: 22px;
+  height: 30px;
+  pointer-events: none;
+  z-index: 1000;
+  transition: left 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              top  0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.3s ease;
+  background:
+    linear-gradient(135deg, #fff 0%, #fff 38%, transparent 38.1%) no-repeat,
+    linear-gradient(135deg, transparent 0%, transparent 38%, rgba(0,0,0,0.4) 38.1%, rgba(0,0,0,0.4) 40%, transparent 40.1%) no-repeat;
+  /* Use an SVG pointer for crispness */
+  background: none;
+}
+.demo-cursor::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 30'><path d='M2 2 L2 25 L8 19 L12 28 L15 27 L11 18 L19 18 Z' fill='white' stroke='black' stroke-width='1.4' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.55));
+}
+
+/* Invisible anchor used by the demo cursor for "home" position
+   (top-right of the dial area). */
+.cursor-home {
+  position: absolute;
+  top: 12px;
+  right: 28px;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+.dial { position: relative; }
