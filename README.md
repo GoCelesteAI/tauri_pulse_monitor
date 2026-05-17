@@ -5,7 +5,7 @@ Demo app for **Episode 2: Tauri 2 IPC — Commands, Events, State — The Three-
 A small system-pulse monitor built on Tauri 2 + React + TypeScript. It demonstrates the three ways Rust and your frontend talk to each other: request/response `invoke()` commands, push `emit()` events, and managed state through the `State<T>` extractor.
 
 - **Watch on YouTube:** https://www.youtube.com/watch?v=JrVx2k9mqU0
-- **Read on Codegiz:** https://codegiz.com/blog/tauri-patterns-episode-2-tauri-2-ipc-commands-events-state-the-three-way-bridge
+- **Read on Codegiz:** https://www.codegiz.com/blog/tauri-patterns-episode-2-tauri-2-ipc-commands-events-state-the-three-way-bridge/
 - **Series index:** https://github.com/GoCelesteAI/tauri-patterns
 
 ## What this app shows
